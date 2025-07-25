@@ -2,7 +2,7 @@
 name: Feat
 about: Request a new feature
 title: "[Feat] 이슈 제목"
-labels: Feat
+labels: Feat, Fix
 assignees: ''
 
 ---
