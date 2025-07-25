@@ -2,7 +2,7 @@
 
 ## 📌 Issue Guide
 
-### Issue 템플릿
+### Issue Template
 
 ---
 
@@ -57,7 +57,7 @@ To-do
 
   - Merge 방식: Squash and Merge
 
-## 📌 Commit message
+## 📌 Commit message Guide
 
 ### 커밋 유형
 
@@ -74,15 +74,15 @@ To-do
 
 [gitmoji](https://gitmoji.dev/)
 
-## 📌 Pull Request 가이드
+## 📌 Pull Request Guide
 
-### PR 템플릿
+### PR Template
 
 ---
 
 PR 제목
 
-[Feat/Fix/Docs/Design/Refactor/ChoreE#이슈번호] 이슈 제목
+[Feat/Fix/Docs/Design/Refactor/Chore#이슈번호] 이슈 제목
 
 ---
 
