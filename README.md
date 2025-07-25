@@ -28,6 +28,13 @@ To-do
 
 ### 브랜치 사용 방법
 
+```
+추가한 branch가 Github Desktop에서 뜨지 않을 경우
+-> Terminal/명령 프롬프트 켜기
+-> 프로젝트 폴더로 접근
+-> git fetch 입력
+```
+
 1. `Issue` 생성
 
 2. `branch` 생성
