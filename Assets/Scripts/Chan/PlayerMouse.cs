@@ -41,7 +41,8 @@ public class PlayerMouse : MonoBehaviour
             tempPos = parentTransform.position + dir;
             tempPos.y -= 0.3f;
         }
-
+        float damage = (tempPos - prevPos).magnitude;
+        Debug.Log(damage * 100f);
         prevPos = tempPos;
         transform.position = tempPos;
         transform.rotation = Quaternion.Euler(0, 0, rotZ);
