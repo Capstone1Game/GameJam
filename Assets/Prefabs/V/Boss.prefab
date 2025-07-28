@@ -163,10 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b54c2e50da7447dd89c8d5702b41489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
   animCon:
   - {fileID: 9100000, guid: 4db7233f08afa4af0a3d86d1493dd36e, type: 2}
-  target: {fileID: 0}
+  target: {fileID: 8743349429477241689, guid: 58ff85dfe4a134d3abab020508b6bb55, type: 3}
   id: 0
   bossName: 
   location: {x: 0, y: 0, z: 0}
