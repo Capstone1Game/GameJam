@@ -30,6 +30,30 @@ public class Boss : MonoBehaviour
         coll = GetComponent<Collider2D>();
         isLive = true;
     }
+
+    void FixedUpdate()
+    {
+        // if (!GameManager.instance.isLive) return;
+        if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+        {
+            return;
+        }
+        Vector2 dirVec = target.position - rigid.position;
+        Vector2 nextVec = dirVec.normalized * moveSpeed * Time.fixedDeltaTime;
+        rigid.MovePosition(rigid.position + nextVec);
+        rigid.velocity = Vector2.zero;
+    }
+
+    void LateUpdate()
+    {
+        // if (!GameManager.instance.isLive) return;
+        if (!isLive)
+        {
+            return;
+        }
+        spriter.flipX = target.position.x < rigid.position.x;
+    }
+
     public void Init(BossData data)
     {
         id = data.id;
@@ -44,4 +68,36 @@ public class Boss : MonoBehaviour
         gameObject.transform.position = data.location;
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player") || !isLive) return;
+        // health -= other.GetComponent<GameManager>().damage;
+        health -= GameManager.instance.damage; // 임시 코드
+        StartCoroutine(KnockBack());
+        if (health > 0)
+        {
+            anim.SetTrigger("Hit");
+        }
+        else
+        {
+            isLive = false;
+            coll.enabled = false;
+            rigid.simulated = false;
+            spriter.sortingOrder = 1;
+            anim.SetBool("Dead", true);
+        }
+    }
+
+    IEnumerator KnockBack()
+    {
+        yield return null;
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        Vector3 dirVec = transform.position - playerPos;
+        rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
+    }
+
+    void Dead()
+    {
+        Destroy(gameObject);
+    }
 }
