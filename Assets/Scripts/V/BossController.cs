@@ -18,6 +18,6 @@ public class BossController : MonoBehaviour
     }
     void Start()
     {
-        CreateBoss(1);
+        CreateBoss(0);
     }
 }
