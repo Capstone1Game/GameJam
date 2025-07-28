@@ -12,8 +12,8 @@ public class BossController : MonoBehaviour
         GameObject instantBoss = Instantiate(prefab);
         if (instantBoss.TryGetComponent(out Boss boss))
         {
-            boss.data = data[id];
-            boss.Init();
+            instantBoss.name = $"Boss {id}";
+            boss.Init(data[id]);
         }
     }
     void Start()

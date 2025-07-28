@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public BossData data;
     public enum State { Attack } // 보스의 행동 상태
     public RuntimeAnimatorController[] animCon;
     public Rigidbody2D target;
@@ -31,7 +30,7 @@ public class Boss : MonoBehaviour
         coll = GetComponent<Collider2D>();
         isLive = true;
     }
-    public void Init()
+    public void Init(BossData data)
     {
         id = data.id;
         bossName = data.bossName;
