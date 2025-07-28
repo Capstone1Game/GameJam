@@ -165,11 +165,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 0}
   animCon:
-  - {fileID: 9100000, guid: fa18a944523ea4c47be2bb03a08e61f7, type: 2}
-  - {fileID: 22100000, guid: 3f714edeffef7467497c9b79eac4e94b, type: 2}
+  - {fileID: 9100000, guid: 4db7233f08afa4af0a3d86d1493dd36e, type: 2}
   target: {fileID: 0}
   id: 0
-  name: 
+  bossName: 
   location: {x: 0, y: 0, z: 0}
   damage: 0
   health: 0
@@ -186,7 +185,7 @@ Animator:
   m_GameObject: {fileID: 6311459435746675968}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fa18a944523ea4c47be2bb03a08e61f7, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
