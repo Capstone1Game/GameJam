@@ -45,10 +45,27 @@ public class Weapon : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        int sel = Random.Range(0, 3);
+        AudioClip audioForSmallAttack = arrAudioForSmallattack[sel];
+        AudioClip audioForBigAttack = arrAudioForBigattack[sel];
+
         if (other.tag == "Boss")
         {
             damage = CalculateDamage();
             other.GetComponent<Boss>().OnDamage(damage);
+
+            if (damage == weaponDamage) // max공격일 때 타격감위해 0.1초 멈추기
+            {
+                StartCoroutine(HitStop(0.25f));
+                GetComponent<AudioSource>().Stop();
+                GetComponent<AudioSource>().PlayOneShot(audioForBigAttack, 1f);
+                Camera.VibrateForTime(0.05f);
+            }
+            else
+            {
+                GetComponent<AudioSource>().Stop();
+                GetComponent<AudioSource>().PlayOneShot(audioForSmallAttack, 0.8f);
+            }
         }
         else if (other.tag == "BossBullet")
         {
@@ -61,11 +78,6 @@ public class Weapon : MonoBehaviour
         {
             damage = CalculateDamage();
             Debug.Log(damage);
-            int sel = Random.Range(0, 3);
-            AudioClip audioForSmallAttack = arrAudioForSmallattack[sel];
-            AudioClip audioForBigAttack = arrAudioForBigattack[sel];
-
-
             
             if (damage == weaponDamage) // max공격일 때 타격감위해 0.1초 멈추기
             {
