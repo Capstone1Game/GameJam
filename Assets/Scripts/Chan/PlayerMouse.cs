@@ -37,6 +37,8 @@ public class PlayerMouse : MonoBehaviour
         rightHand = transform.Find("Hand_Right").gameObject;
         mainCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         parentTransform = transform.parent;
+        leftHand.transform.position = transform.parent.position;
+        rightHand.transform.position = transform.parent.position;
     }
     void Update()
     {
@@ -87,7 +89,7 @@ public class PlayerMouse : MonoBehaviour
     {
         float delta = (targetPos - prevPos).sqrMagnitude;
         if (delta < 0.01f) delta = 0f;
-        velocity = Mathf.Clamp(delta * 3f, 0f, 1f);
+        velocity = Mathf.Clamp(delta * 2f, 0f, 1f);
 
         prevPos = targetPos;
     }
