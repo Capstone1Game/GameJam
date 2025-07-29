@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 362755959814517170}
   - component: {fileID: 958944006129640801}
   - component: {fileID: 8050167127219599356}
-  - component: {fileID: 4293576028595278168}
+  - component: {fileID: 1531004150281931582}
   m_Layer: 0
   m_Name: FireBall
   m_TagString: BossBullet
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa6f151238874219ae74d2ec180d585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   travelTime: 1.5
   arcHeight: 3
 --- !u!212 &958944006129640801
@@ -128,8 +129,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &4293576028595278168
-CapsuleCollider2D:
+--- !u!58 &1531004150281931582
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -161,5 +162,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.22222222, y: 0.44444445}
-  m_Direction: 0
+  serializedVersion: 2
+  m_Radius: 0.16666667
