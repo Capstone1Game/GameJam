@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMov : MonoBehaviour
 {
     public float maxSpeed;
     public float jumpPower;
-    bool isJumping;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
@@ -20,10 +20,10 @@ public class PlayerMov : MonoBehaviour
     void Update()
     {
         //Jump
-        if (Input.GetButtonDown("Jump") && !isJumping)
+        if (Input.GetButtonDown("Jump") && (PlayerManager.Instance.currentState != PlayerManager.State.Jump))
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            isJumping = true;
+            PlayerManager.Instance.SetState(PlayerManager.State.Jump);
         }
 
         //Stop Speed
@@ -34,7 +34,11 @@ public class PlayerMov : MonoBehaviour
 
         //Direction sprite
         if (Input.GetButton("Horizontal"))
-            spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            spriteRenderer.flipX = horizontal == -1;
+            PlayerManager.Instance.isLeft = (horizontal == -1);
+        }
 
         //animation
         if (Mathf.Abs(rigid.velocity.x) < 0.3)
@@ -49,7 +53,8 @@ public class PlayerMov : MonoBehaviour
     {
         //Move Speed
         float h = Input.GetAxisRaw("Horizontal");
-        rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+        //rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+        rigid.velocity = new Vector2(h * maxSpeed, rigid.velocity.y);
 
         //Max Speed
         if (rigid.velocity.x > maxSpeed)
@@ -60,24 +65,12 @@ public class PlayerMov : MonoBehaviour
         {
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
         }
-
-        if(rigid.velocity.y < 0)
-        {
-            Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
-
-            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
-
-            if (rayHit.collider != null)
-            {
-                isJumping = false;
-            }
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Á¡ÇÁ ÇÑ¹ø¸¸ °¡´ÉÇÏ°Ô ÇÔ
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½
         if((collision.gameObject.tag == "Elevator") || (collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Ladder"))
-            isJumping = false;
+            PlayerManager.Instance.SetState(PlayerManager.State.Idle);
     }
 }

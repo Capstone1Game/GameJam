@@ -13,12 +13,14 @@ public class PlayerMouse : MonoBehaviour
     private Vector3 mousePos;
     private Transform parentTransform;
     private float maxoffset = 1f;
+    private SpriteRenderer spriter;
     Rigidbody2D rigid;
     Vector3 targetPos;
     float targetRotZ;
     Vector3 prevPos;
     void Awake()
     {
+        spriter = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         prevPos = transform.position;
     }
@@ -31,6 +33,9 @@ public class PlayerMouse : MonoBehaviour
     {
         GetMousePosition();
         CalPosition();
+        bool isReverse = PlayerManager.Instance.isLeft;
+        spriter.sortingOrder = isReverse ? 3 : 7;
+        spriter.flipX = isReverse;
     }
     //물리연산
     void FixedUpdate()
