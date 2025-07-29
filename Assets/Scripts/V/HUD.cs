@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    public enum InfoType { BossHealth }
+    public enum InfoType { BossHealth, PlayerHealth }
     public InfoType type;
-    Slider BossHealth;
+    Slider healthSlider;
 
     void Awake()
     {
-        BossHealth = GetComponent<Slider>();
+        healthSlider = GetComponent<Slider>();
     }
 
     void LateUpdate()
@@ -21,8 +21,13 @@ public class HUD : MonoBehaviour
         {
             case InfoType.BossHealth:
                 float value = GameManager.instance.bossController.GetHP();
-                BossHealth.value = value;
-                if (value <= 0) BossHealth.gameObject.SetActive(false);
+                healthSlider.value = value;
+                if (value <= 0) healthSlider.gameObject.SetActive(false);
+                break;
+            case InfoType.PlayerHealth:
+                value = PlayerManager.Instance.GetHP();
+                healthSlider.value = value;
+                if (value <= 0) healthSlider.gameObject.SetActive(false);
                 break;
         }
     }
