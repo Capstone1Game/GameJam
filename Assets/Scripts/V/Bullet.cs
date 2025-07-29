@@ -29,21 +29,14 @@ public class Bullet : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        StopAllCoroutines();
-        if (collision.gameObject.tag == "Player")
+        Debug.Log($"충돌 객체 이름: {collision.name}, 태그: {collision.tag}");
+
+        if (collision.CompareTag("Player") || collision.CompareTag("Ground") || collision.CompareTag("Ladder") || collision.CompareTag("Elevator"))
         {
-            Debug.Log("플레이어 피 닳는 로직 실행");
             Destroy(gameObject);
         }
-        else if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Ladder" || collision.gameObject.tag == "Elevator")
-        {
-            Debug.Log("땅에 닿음 감지");
-            coll.enabled = false;
-            rigid.simulated = false;
-            spriter.sortingOrder = 1;
-            Destroy(gameObject, 2f);
-        }
     }
+
 
 
     public IEnumerator FireBullet(Vector3 pos, Vector3 dir)
