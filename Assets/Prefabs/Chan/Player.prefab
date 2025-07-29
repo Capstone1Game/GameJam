@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114970573286374069}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 5080221045138375087}
   - component: {fileID: 290680246584094039}
   - component: {fileID: 2671305314981626742}
+  - component: {fileID: 8696796333588434196}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -249,7 +250,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -346,6 +347,23 @@ MonoBehaviour:
   currentState: 0
   isLeft: 0
   isLive: 1
+  currentHealth: 0
+--- !u!114 &8696796333588434196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832721254227882971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2841d215c6b4016be1efb9e86e5756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  isLeft: 0
+  isLive: 1
+  currentHealth: 0
 --- !u!1 &3029878260189566062
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,6 +375,7 @@ GameObject:
   - component: {fileID: 4805122784948781089}
   - component: {fileID: 1375784789881673362}
   - component: {fileID: 8450035043708091110}
+  - component: {fileID: 8012508958456381592}
   m_Layer: 0
   m_Name: Hand_Right
   m_TagString: Untagged
@@ -372,7 +391,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3029878260189566062}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.1, y: -0.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -459,6 +478,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8012508958456381592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3029878260189566062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15116254fa71e4580a4eaaa03bf6a0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5020403394492941544
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,8 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aeeca63eca974e7fa416c55a8e4d876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHand: {fileID: 6739842078625244127}
-  rightHand: {fileID: 3029878260189566062}
+  isRightClick: 0
   velocity: 0
 --- !u!1 &6739842078625244127
 GameObject:
@@ -520,6 +550,7 @@ GameObject:
   - component: {fileID: 1614612303448979100}
   - component: {fileID: 7193282177656126419}
   - component: {fileID: 3536171387436810260}
+  - component: {fileID: 7348846133434168537}
   m_Layer: 0
   m_Name: Hand_Left
   m_TagString: Untagged
@@ -606,6 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 743d31f5eca1443e0bf709089ee44cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldSprite: {fileID: 1024380575, guid: e350b0564c9972f43af20994017c921b, type: 3}
 --- !u!50 &3536171387436810260
 Rigidbody2D:
   serializedVersion: 4
@@ -633,3 +665,48 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &7348846133434168537
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6739842078625244127}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.22222222, y: 0.22222222}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.22222222, y: 0.22222222}
+  m_EdgeRadius: 0
