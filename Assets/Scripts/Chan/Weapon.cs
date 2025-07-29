@@ -17,6 +17,7 @@ public class Weapon : MonoBehaviour
         if (other.tag == "Boss")
         {
             damage = CalculateDamage();
+            other.GetComponent<Boss>().OnDamage(damage);
             Debug.Log(damage);
         }
     }
