@@ -4,11 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-<<<<<<< Updated upstream
   - Boss
-=======
   - Elevator
->>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX
@@ -16,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Boss
+  - 
   - 
   - 
   - 
