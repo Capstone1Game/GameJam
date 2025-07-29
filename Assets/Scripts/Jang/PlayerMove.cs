@@ -19,6 +19,7 @@ public class PlayerMov : MonoBehaviour
 
     void Update()
     {
+        if (!PlayerManager.Instance.isLive) return;
         //Jump
         if (Input.GetButtonDown("Jump") && (PlayerManager.Instance.currentState != PlayerManager.State.Jump))
         {
@@ -46,6 +47,7 @@ public class PlayerMov : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!PlayerManager.Instance.isLive) return;
         //Max Speed
         if (rigid.velocity.x > maxSpeed)
         {
