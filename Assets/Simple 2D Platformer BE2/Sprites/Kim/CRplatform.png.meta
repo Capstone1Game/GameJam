@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 85da00cf4b7d5bf43a78ce508fc9cb41
+guid: 521df14f8db28184cb598951de46220d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -97,91 +97,49 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CPlatforms_0
+      name: CRplatform_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 85
-        width: 15
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d11564fad29c46e4bbb2027da9036e1b
-      internalID: 371751785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CPlatforms_1
-      rect:
-        serializedVersion: 2
-        x: 17
+        x: 0
         y: 85
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ddce93ad30e2ba34eb9ac54b8e7bfc15
-      internalID: 1546980020
+      spriteID: f5df3f6f786c4b74790b16b977b7bd5c
+      internalID: -1304827456
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_2
+      name: CRplatform_1
       rect:
         serializedVersion: 2
-        x: 34
-        y: 85
-        width: 15
-        height: 16
-      alignment: 9
-      pivot: {x: 0.61250407, y: 0.50753355}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a4c2b6f37f8e68544880ac94677c4cf0
-      internalID: -1525209145
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CPlatforms_3
-      rect:
-        serializedVersion: 2
-        x: 1
+        x: 0
         y: 68
-        width: 15
+        width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f7dc67a87f550445872c3ce957a4651
-      internalID: 900832213
+      spriteID: 8dd84b1b44a292d439f0d2769c611a9d
+      internalID: 249459162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_4
+      name: CRplatform_2
       rect:
         serializedVersion: 2
         x: 17
@@ -189,41 +147,41 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65c86ae93773ca642882f3e754a208b5
-      internalID: -1073518326
+      spriteID: 121439a21fb57d748a35a355090a9018
+      internalID: -307108060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_5
+      name: CRplatform_3
       rect:
         serializedVersion: 2
         x: 34
         y: 68
-        width: 14
+        width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 380c74111e92d6f43820b14044ff0c78
-      internalID: -1384185107
+      spriteID: 4ce2d9cba84ed6e4a991b9cf4fe4cad3
+      internalID: -1480239816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_6
+      name: CRplatform_4
       rect:
         serializedVersion: 2
         x: 1
@@ -231,20 +189,20 @@ TextureImporter:
         width: 15
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecf607db9de1280498d2450d55c5107a
-      internalID: 1819882679
+      spriteID: 656be7fec91200042a3fb1554754b4dc
+      internalID: 372493932
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_7
+      name: CRplatform_5
       rect:
         serializedVersion: 2
         x: 17
@@ -252,41 +210,41 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a097e4685c3cee8419f376026abe8fa4
-      internalID: -111734876
+      spriteID: a205d164dc1378c488129cb52c85fe29
+      internalID: 1470677357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_8
+      name: CRplatform_6
       rect:
         serializedVersion: 2
         x: 34
         y: 51
-        width: 14
+        width: 15
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b717abf2e0e0e4e46bcde5e8961bce4e
-      internalID: -1666335578
+      spriteID: ee7405c56357fb04d8798ba5412489d1
+      internalID: 71684317
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_9
+      name: CRplatform_7
       rect:
         serializedVersion: 2
         x: 1
@@ -294,104 +252,104 @@ TextureImporter:
         width: 15
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 393274604f5103f4e9382e5a2f46a1ef
-      internalID: -1624270697
+      spriteID: 3358163847df8034892e3edc0591b3aa
+      internalID: 2106681667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_10
+      name: CRplatform_8
       rect:
         serializedVersion: 2
         x: 17
         y: 34
-        width: 15
+        width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1780139f6111cd7439bc8b9396049e73
-      internalID: 873020517
+      spriteID: 252b928f2fe78994cb7415ca73720663
+      internalID: 604686403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_11
+      name: CRplatform_9
       rect:
         serializedVersion: 2
         x: 34
         y: 34
-        width: 14
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 271456107f02729468f025bafd2cff19
-      internalID: 1097935564
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CPlatforms_12
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 17
         width: 15
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 013fe7ebdefb8c54384f419735b6f12f
-      internalID: -616853247
+      spriteID: 1a904d6a22e7526439305d8f26468e78
+      internalID: -863652238
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_13
+      name: CRplatform_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 17
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77b8a8106ede2b44a95a0f6fa0cd71e1
+      internalID: 1988503037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CRplatform_11
       rect:
         serializedVersion: 2
         x: 17
         y: 17
-        width: 15
+        width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecf171862e5470b4eaa4c36510745f13
-      internalID: 1546654755
+      spriteID: c42771e444ee91e4ca775f1f26f1809e
+      internalID: 173280614
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_14
+      name: CRplatform_12
       rect:
         serializedVersion: 2
         x: 34
@@ -399,20 +357,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c0d425f6caeb0e4d84b20454509996e
-      internalID: -412823184
+      spriteID: 55f78dd75df21eb48863174435412630
+      internalID: -1692882721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CPlatforms_15
+      name: CRplatform_13
       rect:
         serializedVersion: 2
         x: 0
@@ -420,14 +378,56 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89b378adef665f54d973fc912223508c
-      internalID: 748610133
+      spriteID: c5f3f2ccc64389b44a73a26fdd7e9d19
+      internalID: 1523844041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CRplatform_14
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 85
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ec67589ef570a549816a00e17671677
+      internalID: 1449108914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CRplatform_15
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 85
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eeac7e77cb4560746beaa768ec62c90f
+      internalID: 1543388618
       vertices: []
       indices: 
       edges: []
@@ -443,22 +443,22 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CPlatforms_0: 371751785
-      CPlatforms_1: 1546980020
-      CPlatforms_10: 873020517
-      CPlatforms_11: 1097935564
-      CPlatforms_12: -616853247
-      CPlatforms_13: 1546654755
-      CPlatforms_14: -412823184
-      CPlatforms_15: 748610133
-      CPlatforms_2: -1525209145
-      CPlatforms_3: 900832213
-      CPlatforms_4: -1073518326
-      CPlatforms_5: -1384185107
-      CPlatforms_6: 1819882679
-      CPlatforms_7: -111734876
-      CPlatforms_8: -1666335578
-      CPlatforms_9: -1624270697
+      CRplatform_0: -1304827456
+      CRplatform_1: 249459162
+      CRplatform_10: 1988503037
+      CRplatform_11: 173280614
+      CRplatform_12: -1692882721
+      CRplatform_13: 1523844041
+      CRplatform_14: 1449108914
+      CRplatform_15: 1543388618
+      CRplatform_2: -307108060
+      CRplatform_3: -1480239816
+      CRplatform_4: 372493932
+      CRplatform_5: 1470677357
+      CRplatform_6: 71684317
+      CRplatform_7: 2106681667
+      CRplatform_8: 604686403
+      CRplatform_9: -863652238
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
