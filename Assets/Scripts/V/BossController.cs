@@ -26,7 +26,7 @@ public class BossController : MonoBehaviour
         {
             case 0:
                 StartCoroutine(FireBullet(boss.bullet[0]));
-                StartCoroutine(DrawLaser(boss.bullet[1]));
+                // StartCoroutine(DrawLaser(boss.bullet[1]));
                 break;
         }
     }
