@@ -20,6 +20,13 @@ public class Weapon : MonoBehaviour
             other.GetComponent<Boss>().OnDamage(damage);
             Debug.Log(damage);
         }
+        else if (other.tag == "BossBullet")
+        {
+            Rigidbody2D bulletRigid = other.GetComponent<Rigidbody2D>();
+            if (bulletRigid == null) return;
+            Vector2 reverseForce = new Vector2(-bulletRigid.velocity.x, bulletRigid.velocity.y);
+            bulletRigid.AddForce(reverseForce, ForceMode2D.Impulse);
+        }
     }
     //무기의 대미지를 받고 움직이는 속도에 따라 0~1의
     int CalculateDamage()
