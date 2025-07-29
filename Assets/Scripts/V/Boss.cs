@@ -64,6 +64,7 @@ public class Boss : MonoBehaviour
         spriter.sprite = data.sprite;
         anim.runtimeAnimatorController = animCon[id];
         gameObject.transform.position = data.location;
+        target = GameObject.Find("Player").GetComponent<Rigidbody2D>();
     }
 
     public void SetState(State state)
