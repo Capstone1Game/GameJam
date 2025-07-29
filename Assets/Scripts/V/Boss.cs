@@ -11,7 +11,8 @@ public class Boss : MonoBehaviour
 
     public int id;
     public string bossName;
-    public Vector3 location; // 생성할 보스 위치
+    public Vector3 pos; // 생성할 보스 위치
+    public Quaternion rot;
     public float contactDamage;
     public float[] bulletDamage;
     public float health; // 현재 체력
@@ -58,7 +59,8 @@ public class Boss : MonoBehaviour
     {
         id = data.id;
         bossName = data.bossName;
-        location = data.location;
+        pos = data.pos;
+        rot = data.rot;
         contactDamage = data.contactDamage;
         bulletDamage = data.bulletDamage;
         health = data.maxHealth;
@@ -66,7 +68,7 @@ public class Boss : MonoBehaviour
         moveSpeed = data.moveSpeed;
         spriter.sprite = data.sprite;
         anim.runtimeAnimatorController = animCon[id];
-        gameObject.transform.position = data.location;
+        gameObject.transform.position = data.pos;
         target = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         bullet = data.bullet;
     }
@@ -98,7 +100,7 @@ public class Boss : MonoBehaviour
         dirVec.y = 0;
         rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
         yield return new WaitForSeconds(1f);
-        StartCoroutine(Reposition(location));
+        StartCoroutine(Reposition(pos));
     }
 
     IEnumerator Reposition(Vector3 dirVec)
