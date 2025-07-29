@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - Ground
   - BossBullet
+  - Dummy
   layers:
   - Default
   - TransparentFX
