@@ -5,16 +5,27 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public enum Type { FireBall, Laser }
+    public Type type;
     public float travelTime = 1.5f;
     public float arcHeight = 3f;
     Rigidbody2D rigid;
     SpriteRenderer spriter;
+    LineRenderer lineRenderer;
     Collider2D coll;
     void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        spriter = GetComponent<SpriteRenderer>();
-        coll = GetComponent<Collider2D>();
+        switch (type)
+        {
+            case Type.FireBall:
+                rigid = GetComponent<Rigidbody2D>();
+                spriter = GetComponent<SpriteRenderer>();
+                coll = GetComponent<Collider2D>();
+                break;
+            case Type.Laser:
+                lineRenderer = GetComponent<LineRenderer>();
+                break;
+        }
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -74,4 +85,22 @@ public class Bullet : MonoBehaviour
             transform.position = dir;
     }
 
+    public IEnumerator DrawLaser(Vector3 pos, Vector3 dir)
+    {
+        lineRenderer.positionCount = 2;
+        Vector3 dirVec = (dir - pos).normalized;
+        float time = 0f;
+        while (time < travelTime)
+        {
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / travelTime);
+            Vector3 curPos = pos + dirVec * t * 20;
+
+            lineRenderer.SetPosition(0, pos);
+            lineRenderer.SetPosition(1, curPos);
+
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
 }
