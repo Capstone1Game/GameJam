@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1507097686766153167, guid: 3a6b8788b746e334da1a69c503abe976, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 8c63297f2e53a75479643bf2f1e97e4b, type: 2}
     - target: {fileID: 2189912868454443863, guid: 3a6b8788b746e334da1a69c503abe976, type: 3}
       propertyPath: m_Name
       value: Elevator
@@ -56,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8717410791512003148, guid: 3a6b8788b746e334da1a69c503abe976, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 8c63297f2e53a75479643bf2f1e97e4b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -81,5 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d8171aef03131648a461e097007c216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDirection: 0
   moveDistance: 3
   speed: 2
