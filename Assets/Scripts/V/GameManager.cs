@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameObject player; // 임시 코드
+    public GameObject boss;
     public BossController bossController;
     void Awake()
     {
