@@ -49,6 +49,11 @@ public class PlayerManager : MonoBehaviour
             OnDamage(other.transform.position, (int) GameManager.instance.bossController.GetContactDamage());
         }
     }
+
+    public float GetHP()
+    {   float damage = (float) currentHealth / maxHealth;
+        return damage;
+    }
     public void OnDamage(Vector2 targetPos, int damage)
     {
         if (isDamage) return;
@@ -60,10 +65,10 @@ public class PlayerManager : MonoBehaviour
             return;
         } else
         {
-            StartCoroutine(KnockBack(targetPos, damage));
+            StartCoroutine(KnockBack(targetPos));
         }
     }
-    public IEnumerator KnockBack(Vector2 targetPos,int damage)
+    public IEnumerator KnockBack(Vector2 targetPos)
     {
         spriter.color = Color.red;
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
