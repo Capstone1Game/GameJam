@@ -9,17 +9,31 @@ public class Weapon : MonoBehaviour
     private PlayerMouse parentMouse;
     public int damage;
     private SpriteRenderer spriter;
+
+    private Vector2 weaponPos = new Vector2(0.2f, 0f);
+    private Vector2 weaponReversePos = new Vector2(-0.2f, 0f);
     void Awake()
     {
         spriter = GetComponent<SpriteRenderer>();
     }
     void Start()
     {
-        parentMouse = transform.parent.GetComponent<PlayerMouse>();
+        parentMouse = transform.parent.parent.GetComponent<PlayerMouse>();
     }
     void Update()
     {
         spriter.sortingOrder = PlayerManager.Instance.isLeft ? 3 : 6;
+
+        if (PlayerManager.Instance.isLeft && parentMouse.isRightClick)
+        {
+            spriter.flipY = true;
+            transform.localPosition = weaponReversePos;
+        }
+        else
+        {
+            spriter.flipY = false;
+            transform.localPosition = weaponPos;
+        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {

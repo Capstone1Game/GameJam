@@ -6,15 +6,15 @@ using UnityEngine;
 public class PlayerMouse : MonoBehaviour
 {
     //왼손 오른손 전환을 위한 오브젝트
-    public GameObject leftHand;
-    public GameObject rightHand;
-    private bool isRightClick;
+    private GameObject leftHand;
+    private GameObject rightHand;
+    public bool isRightClick = false;
     //왼손 선택이 아닐때 기본 위치
     Vector2 leftPos = new Vector2(0.25f, -0.37f);
     Vector2 leftReversePos = new Vector2(0.15f, -0.37f);
     //오른손 선택이 아닐때 기본 위치
     Vector2 rightPos = new Vector2(-0.1f, -0.37f);
-    Vector2 rightReversePos = new Vector2(0f, -0.37f);
+    Vector2 rightReversePos = new Vector2(-0.2f, -0.37f);
 
     public float velocity;
     private Camera mainCam;
@@ -26,15 +26,15 @@ public class PlayerMouse : MonoBehaviour
     float targetRotZ;
     Vector3 prevPos;
 
-    //private SpriteRenderer spriter;
     void Awake()
     {
-        //spriter = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         prevPos = transform.position;
     }
     void Start()
     {
+        leftHand = transform.Find("Hand_Left").gameObject;
+        rightHand = transform.Find("Hand_Right").gameObject;
         mainCam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         parentTransform = transform.parent;
     }
@@ -45,9 +45,6 @@ public class PlayerMouse : MonoBehaviour
 
         GetMousePosition();
         CalPosition();
-        //bool isReverse = PlayerManager.Instance.isLeft;
-        //spriter.sortingOrder = isReverse ? 4 : 7;
-        //spriter.flipX = isReverse;
     }
     //물리연산
     void FixedUpdate()
@@ -98,13 +95,13 @@ public class PlayerMouse : MonoBehaviour
             leftRigid.MovePosition(targetPos);
             leftRigid.MoveRotation(targetRotZ);
 
-            rightHand.transform.position = isReverse ? rightPos : rightReversePos;
-            rightHand.transform.rotation = Quaternion.identity;
+            rightHand.transform.localPosition = isReverse ? rightReversePos :rightPos;
+            rightHand.transform.localRotation = Quaternion.identity;
         }
         else
         {
-            leftHand.transform.position = isReverse ? leftReversePos : leftPos;
-            leftHand.transform.rotation = Quaternion.identity;
+            leftHand.transform.localPosition = isReverse ? leftReversePos : leftPos;
+            leftHand.transform.localRotation = Quaternion.identity;
 
             Rigidbody2D rightRigid = rightHand.GetComponent<Rigidbody2D>();
             rightRigid.MovePosition(targetPos);
