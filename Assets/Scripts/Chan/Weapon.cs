@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour
             damage = CalculateDamage();
             other.GetComponent<Boss>().OnDamage(damage);
             Debug.Log(damage);
+
         }
         else if (other.tag == "BossBullet")
         {
