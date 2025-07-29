@@ -40,8 +40,13 @@ public class PlayerMouse : MonoBehaviour
     }
     void Update()
     {
+        if (!PlayerManager.Instance.isLive)
+        {
+            transform.gameObject.SetActive(false);
+            return;
+        }
         //오른쪽 버튼 입력받음
-        isRightClick = Input.GetMouseButton(1);
+            isRightClick = Input.GetMouseButton(1);
 
         GetMousePosition();
         CalPosition();
@@ -49,6 +54,7 @@ public class PlayerMouse : MonoBehaviour
     //물리연산
     void FixedUpdate()
     {
+        if (!PlayerManager.Instance.isLive) return;
         CalVelocity();
         Moving();
     }

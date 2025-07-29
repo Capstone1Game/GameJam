@@ -16,7 +16,9 @@ public class PlayerManager : MonoBehaviour
     private Rigidbody2D rigid;
 
     public int currentHealth;
-    private int maxHealth = 100;
+    private int maxHealth = 20;
+    Animator anim;
+
     void Awake()
     {
         if (Instance == null)
@@ -24,6 +26,7 @@ public class PlayerManager : MonoBehaviour
         currentHealth = maxHealth;
         spriter = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     public void SetState(State state)
@@ -72,6 +75,7 @@ public class PlayerManager : MonoBehaviour
 
     void DoDie()
     {
-
+        isLive = false;
+        anim.SetTrigger("DoDeath");
     }
 }
