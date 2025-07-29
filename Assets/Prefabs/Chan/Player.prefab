@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 743d31f5eca1443e0bf709089ee44cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldSprite: {fileID: 0}
+  shieldSprite: {fileID: -2059480861, guid: e350b0564c9972f43af20994017c921b, type: 3}
 --- !u!50 &1363475343467346195
 Rigidbody2D:
   serializedVersion: 4
@@ -322,8 +322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a541a7b055458f941956574b7fd92445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 0
-  jumpPower: 0
+  maxSpeed: 5
+  jumpPower: 20
 --- !u!70 &7497918250600685636
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -374,7 +374,41 @@ MonoBehaviour:
   currentState: 0
   isLeft: 0
   isLive: 1
+  isDamage: 0
   currentHealth: 0
+  isRightClick: 0
+  isLeftClick: 0
+--- !u!1 &4390070742161429610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1900813209182287300}
+  m_Layer: 0
+  m_Name: EquipPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1900813209182287300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4390070742161429610}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.064, y: -0.043, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 191542431572116753}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7683927717818756041
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,8 +455,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aeeca63eca974e7fa416c55a8e4d876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRightClick: 0
   velocity: 0
+  movingVector: {x: 0, y: 0}
+  PreVector: {x: 0, y: 0}
 --- !u!1 &7784072085859949577
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +470,7 @@ GameObject:
   - component: {fileID: 8735269637696759118}
   - component: {fileID: 9021865635894965636}
   - component: {fileID: 4618037223352585466}
+  - component: {fileID: 5117472935025086921}
   m_Layer: 0
   m_Name: Hand_Right
   m_TagString: Untagged
@@ -455,6 +491,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1900813209182287300}
   - {fileID: 7725005255946419033}
   m_Father: {fileID: 294993991527501743}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -549,6 +586,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15116254fa71e4580a4eaaa03bf6a0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Detec: 0.3
+  equipPoint: {fileID: 4390070742161429610}
+--- !u!58 &5117472935025086921
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784072085859949577}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!1 &8955480154588951896
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +722,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  arrAudioForSmallattack: []
+  arrAudioForBigattack: []
 --- !u!61 &4963432448324191428
 BoxCollider2D:
   m_ObjectHideFlags: 0

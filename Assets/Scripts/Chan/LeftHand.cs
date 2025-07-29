@@ -8,7 +8,6 @@ public class LeftHand : MonoBehaviour
 
     public Sprite shieldSprite;
     private Sprite originSprite;
-    private PlayerMouse parentMouse;
 
     void Awake()
     {
@@ -17,14 +16,13 @@ public class LeftHand : MonoBehaviour
 
     void Start()
     {
-        parentMouse = transform.parent.GetComponent<PlayerMouse>();
         originSprite = spriter.sprite;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (parentMouse.isRightClick)
+        if (PlayerManager.Instance.isRightClick)
         {
             spriter.sprite = shieldSprite;
         }
