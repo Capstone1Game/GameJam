@@ -24,8 +24,8 @@ public class BossController : MonoBehaviour
         switch (id)
         {
             case 0:
-                Debug.Log(boss.name);
-                StartCoroutine(FireBullet(boss.bullet));
+                StartCoroutine(FireBullet(boss.bullet[0]));
+                StartCoroutine(DrawLaser(boss.bullet[1]));
                 break;
         }
     }
@@ -35,9 +35,20 @@ public class BossController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(2f);
-            GameObject instantBullet = Instantiate(bullet);
+            GameObject instantBullet = Instantiate(bullet, boss.transform.position, boss.transform.rotation);
             instantBullet.transform.SetParent(boss.transform);
             StartCoroutine(instantBullet.GetComponent<Bullet>().FireBullet(instantBullet.transform.position, boss.target.position));
+        }
+    }
+
+    IEnumerator DrawLaser(GameObject bullet)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            GameObject instantBullet = Instantiate(bullet, boss.transform.position, boss.transform.rotation);
+            instantBullet.transform.SetParent(boss.transform);
+            StartCoroutine(instantBullet.GetComponent<Bullet>().DrawLaser(instantBullet.transform.position, boss.target.position));
         }
     }
 }
