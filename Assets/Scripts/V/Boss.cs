@@ -12,12 +12,10 @@ public class Boss : MonoBehaviour
     public int id;
     public string bossName;
     public Vector3 location; // 생성할 보스 위치
-    public float contactDamage;
-    public float[] bulletDamage;
+    public float damage;
     public float health; // 현재 체력
     public float maxHealth; // 최대 체력
     public float moveSpeed; // 이동 속도
-    public GameObject bullet;
 
     public bool isLive;
     Rigidbody2D rigid;
@@ -59,16 +57,13 @@ public class Boss : MonoBehaviour
         id = data.id;
         bossName = data.bossName;
         location = data.location;
-        contactDamage = data.contactDamage;
-        bulletDamage = data.bulletDamage;
+        damage = data.damage;
         health = data.maxHealth;
         maxHealth = data.maxHealth;
         moveSpeed = data.moveSpeed;
         spriter.sprite = data.sprite;
         anim.runtimeAnimatorController = animCon[id];
         gameObject.transform.position = data.location;
-        target = GameObject.Find("Player").GetComponent<Rigidbody2D>();
-        bullet = data.bullet;
     }
 
     public void SetState(State state)
