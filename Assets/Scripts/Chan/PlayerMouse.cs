@@ -8,7 +8,7 @@ public class PlayerMouse : MonoBehaviour
     //왼손 오른손 전환을 위한 오브젝트
     private GameObject leftHand;
     private GameObject rightHand;
-    public bool isRightClick = false;
+    
     //왼손 선택이 아닐때 기본 위치
     Vector2 leftPos = new Vector2(0.25f, -0.37f);
     Vector2 leftReversePos = new Vector2(0.15f, -0.37f);
@@ -25,6 +25,9 @@ public class PlayerMouse : MonoBehaviour
     Vector3 targetPos;
     float targetRotZ;
     Vector3 prevPos;
+
+    public Vector2 movingVector;
+    public Vector2 PreVector;
 
     void Awake()
     {
@@ -47,8 +50,6 @@ public class PlayerMouse : MonoBehaviour
             transform.gameObject.SetActive(false);
             return;
         }
-        //오른쪽 버튼 입력받음
-            isRightClick = Input.GetMouseButton(1);
 
         GetMousePosition();
         CalPosition();
@@ -56,8 +57,9 @@ public class PlayerMouse : MonoBehaviour
     //물리연산
     void FixedUpdate()
     {
+        PreVector = movingVector;
         if (!PlayerManager.Instance.isLive) return;
-        CalVelocity();
+        movingVector = CalVelocity();
         Moving();
     }
 
@@ -85,19 +87,22 @@ public class PlayerMouse : MonoBehaviour
         }
     }
 
-    void CalVelocity()
+    Vector2 CalVelocity()
     {
-        float delta = (targetPos - prevPos).sqrMagnitude;
+        Vector2 vector = targetPos - prevPos;
+        float delta = (vector).sqrMagnitude;
         if (delta < 0.01f) delta = 0f;
         velocity = Mathf.Clamp(delta * 2f, 0f, 1f);
 
         prevPos = targetPos;
+        return vector;
     }
+
 
     void Moving()
     {
         bool isReverse = PlayerManager.Instance.isLeft;
-        if (isRightClick)
+        if (PlayerManager.Instance.isRightClick)
         {
             Rigidbody2D leftRigid = leftHand.GetComponent<Rigidbody2D>();
             leftRigid.MovePosition(targetPos);

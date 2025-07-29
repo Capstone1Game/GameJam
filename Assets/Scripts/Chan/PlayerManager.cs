@@ -19,6 +19,9 @@ public class PlayerManager : MonoBehaviour
     private int maxHealth = 100;
     Animator anim;
 
+    public bool isRightClick = false;
+    public bool isLeftClick = false;
+
     void Awake()
     {
         if (Instance == null)
@@ -27,6 +30,13 @@ public class PlayerManager : MonoBehaviour
         spriter = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        //오른쪽 버튼 입력받음
+        isRightClick = Input.GetMouseButton(1);
+        isLeftClick = Input.GetMouseButton(0);
     }
 
     public void SetState(State state)
