@@ -29,8 +29,13 @@ public class Bullet : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") || collision.CompareTag("Ground") || collision.CompareTag("Ladder") || collision.CompareTag("Elevator"))
+        if (collision.CompareTag("Ground") || collision.CompareTag("Ladder") || collision.CompareTag("Elevator"))
         {
+            Destroy(gameObject);
+        }
+        else if (collision.CompareTag("Player") && !PlayerManager.Instance.isDamage)
+        {
+            PlayerManager.Instance.OnDamage(collision.transform.position, (int) GameManager.instance.bossController.GetBulletDamage(0));
             Destroy(gameObject);
         }
     }
