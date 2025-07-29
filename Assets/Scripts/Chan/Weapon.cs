@@ -8,9 +8,18 @@ public class Weapon : MonoBehaviour
     private int weaponDamage = 10;
     private PlayerMouse parentMouse;
     public int damage;
+    private SpriteRenderer spriter;
+    void Awake()
+    {
+        spriter = GetComponent<SpriteRenderer>();
+    }
     void Start()
     {
         parentMouse = transform.parent.GetComponent<PlayerMouse>();
+    }
+    void Update()
+    {
+        spriter.sortingOrder = PlayerManager.Instance.isLeft ? 3 : 6;
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -18,13 +27,12 @@ public class Weapon : MonoBehaviour
         {
             damage = CalculateDamage();
             other.GetComponent<Boss>().OnDamage(damage);
-            Debug.Log(damage);
         }
         else if (other.tag == "BossBullet")
         {
             Rigidbody2D bulletRigid = other.GetComponent<Rigidbody2D>();
             if (bulletRigid == null) return;
-            Vector2 reverseForce = new Vector2(-bulletRigid.velocity.x, bulletRigid.velocity.y);
+            Vector2 reverseForce = -bulletRigid.velocity;
             bulletRigid.AddForce(reverseForce, ForceMode2D.Impulse);
         }
     }
