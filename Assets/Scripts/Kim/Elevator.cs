@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class ElevatorPlatform : MonoBehaviour
 {
-    public float moveDistance = 3f; // How far it moves vertically
+    public enum MoveDirection { Vertical, Horizontal }
+    public MoveDirection moveDirection = MoveDirection.Vertical;
+
+    public float moveDistance = 3f; // How far it moves
     public float speed = 2f;
+
     private Vector3 startPos;
-    private bool movingUp = true;
 
     void Start()
     {
@@ -15,6 +18,14 @@ public class ElevatorPlatform : MonoBehaviour
     void Update()
     {
         float offset = Mathf.PingPong(Time.time * speed, moveDistance);
-        transform.position = startPos + Vector3.up * offset;
+
+        if (moveDirection == MoveDirection.Vertical)
+        {
+            transform.position = startPos + Vector3.up * offset;
+        }
+        else // Horizontal
+        {
+            transform.position = startPos + Vector3.right * offset;
+        }
     }
 }
