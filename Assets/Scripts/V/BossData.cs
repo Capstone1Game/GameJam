@@ -7,7 +7,8 @@ public class BossData : ScriptableObject
 {
     public int id;
     public string bossName;
-    public Vector3 location; // 생성할 보스 위치
+    public Vector3 pos; // 생성할 보스 위치
+    public Quaternion rot;
     public Sprite sprite;
     public float contactDamage;
     public float[] bulletDamage;
