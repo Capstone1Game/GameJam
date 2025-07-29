@@ -17,7 +17,7 @@ public class Boss : MonoBehaviour
     public float health; // 현재 체력
     public float maxHealth; // 최대 체력
     public float moveSpeed; // 이동 속도
-    public GameObject bullet;
+    public GameObject[] bullet;
 
     public bool isLive;
     Rigidbody2D rigid;
