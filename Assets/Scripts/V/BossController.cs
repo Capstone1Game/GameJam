@@ -16,9 +16,4 @@ public class BossController : MonoBehaviour
             boss.Init(data[id]);
         }
     }
-
-    void Start()
-    {
-        CreateBoss(0);
-    }
 }
