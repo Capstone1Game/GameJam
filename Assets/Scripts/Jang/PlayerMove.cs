@@ -29,33 +29,23 @@ public class PlayerMov : MonoBehaviour
         //Stop Speed
         if (Input.GetButtonUp("Horizontal"))
         {
-            rigid.velocity = new Vector2(rigid.velocity.x*0.5f, rigid.velocity.y);
+            rigid.velocity = Vector2.zero;
         }
 
         //Direction sprite
         if (Input.GetButton("Horizontal"))
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
+            rigid.velocity = new Vector2(horizontal * maxSpeed, rigid.velocity.y);
             spriteRenderer.flipX = horizontal == -1;
             PlayerManager.Instance.isLeft = (horizontal == -1);
         }
-
-        //animation
-        if (Mathf.Abs(rigid.velocity.x) < 0.3)
-            anim.SetBool("isWalking", false);
-        else
-            anim.SetBool("isWalking", true);
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Move Speed
-        float h = Input.GetAxisRaw("Horizontal");
-        //rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
-        rigid.velocity = new Vector2(h * maxSpeed, rigid.velocity.y);
-
         //Max Speed
         if (rigid.velocity.x > maxSpeed)
         {
@@ -65,6 +55,12 @@ public class PlayerMov : MonoBehaviour
         {
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
         }
+
+        //animation
+        if (Mathf.Abs(rigid.velocity.x) < 0.3)
+            anim.SetBool("isWalking", false);
+        else
+            anim.SetBool("isWalking", true);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
