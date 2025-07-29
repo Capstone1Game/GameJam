@@ -21,4 +21,6 @@ MonoBehaviour:
   - 10
   maxHealth: 100
   moveSpeed: 0
-  bullet: {fileID: 8634533711530275406, guid: 55c9e3252d0164cab9d97bd7bd42faf2, type: 3}
+  bullet:
+  - {fileID: 8634533711530275406, guid: 55c9e3252d0164cab9d97bd7bd42faf2, type: 3}
+  - {fileID: 5672915399843459553, guid: c8117b58addfc4b1cb705c1080509d2e, type: 3}
