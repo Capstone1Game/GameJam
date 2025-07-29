@@ -2,12 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 public class Weapon : MonoBehaviour
 {
     private int weaponDamage = 10;
     private PlayerMouse parentMouse;
     public int damage;
+
+    public AudioClip[] arrAudioForSmallattack;
+    public AudioClip[] arrAudioForBigattack;
+    CameraShake Camera;
+
     private SpriteRenderer spriter;
 
     private Vector2 weaponPos = new Vector2(0.2f, 0f);
@@ -19,6 +26,7 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         parentMouse = transform.parent.parent.GetComponent<PlayerMouse>();
+        Camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
     }
     void Update()
     {
@@ -49,6 +57,29 @@ public class Weapon : MonoBehaviour
             Vector2 reverseForce = -bulletRigid.velocity;
             bulletRigid.AddForce(reverseForce, ForceMode2D.Impulse);
         }
+        else if(other.tag == "Dummy")
+        {
+            damage = CalculateDamage();
+            Debug.Log(damage);
+            int sel = Random.Range(0, 3);
+            AudioClip audioForSmallAttack = arrAudioForSmallattack[sel];
+            AudioClip audioForBigAttack = arrAudioForBigattack[sel];
+
+
+            
+            if (damage == weaponDamage) // max공격일 때 타격감위해 0.1초 멈추기
+            {
+                StartCoroutine(HitStop(0.25f));
+                GetComponent<AudioSource>().Stop();
+                GetComponent<AudioSource>().PlayOneShot(audioForBigAttack, 1f);
+                Camera.VibrateForTime(0.05f);
+            }
+            else
+            {
+                GetComponent<AudioSource>().Stop();
+                GetComponent<AudioSource>().PlayOneShot(audioForSmallAttack, 0.8f);
+            }
+        }
     }
     //무기의 대미지를 받고 움직이는 속도에 따라 0~1의
     int CalculateDamage()
@@ -57,5 +88,13 @@ public class Weapon : MonoBehaviour
         int temp = (int)((float)weaponDamage * velocity);
         if (temp < 1) temp = 1;
         return temp;
+    }
+
+    //타격 시 일정 데미지 이상을 줄 때 정지 효과
+    IEnumerator HitStop(float duration)
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f;
     }
 }
