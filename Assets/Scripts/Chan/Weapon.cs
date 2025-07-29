@@ -10,14 +10,38 @@ public class Weapon : MonoBehaviour
     private int weaponDamage = 10;
     private PlayerMouse parentMouse;
     public int damage;
+
     public AudioClip[] arrAudioForSmallattack;
     public AudioClip[] arrAudioForBigattack;
     CameraShake Camera;
 
+    private SpriteRenderer spriter;
+
+    private Vector2 weaponPos = new Vector2(0.2f, 0f);
+    private Vector2 weaponReversePos = new Vector2(-0.2f, 0f);
+    void Awake()
+    {
+        spriter = GetComponent<SpriteRenderer>();
+    }
     void Start()
     {
-        parentMouse = transform.parent.GetComponent<PlayerMouse>();
+        parentMouse = transform.parent.parent.GetComponent<PlayerMouse>();
         Camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
+    }
+    void Update()
+    {
+        spriter.sortingOrder = PlayerManager.Instance.isLeft ? 3 : 6;
+
+        if (PlayerManager.Instance.isLeft && parentMouse.isRightClick)
+        {
+            spriter.flipY = true;
+            transform.localPosition = weaponReversePos;
+        }
+        else
+        {
+            spriter.flipY = false;
+            transform.localPosition = weaponPos;
+        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,13 +49,12 @@ public class Weapon : MonoBehaviour
         {
             damage = CalculateDamage();
             other.GetComponent<Boss>().OnDamage(damage);
-            Debug.Log(damage);
         }
         else if (other.tag == "BossBullet")
         {
             Rigidbody2D bulletRigid = other.GetComponent<Rigidbody2D>();
             if (bulletRigid == null) return;
-            Vector2 reverseForce = new Vector2(-bulletRigid.velocity.x, bulletRigid.velocity.y);
+            Vector2 reverseForce = -bulletRigid.velocity;
             bulletRigid.AddForce(reverseForce, ForceMode2D.Impulse);
         }
         else if(other.tag == "Dummy")

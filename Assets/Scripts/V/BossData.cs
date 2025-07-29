@@ -9,7 +9,9 @@ public class BossData : ScriptableObject
     public string bossName;
     public Vector3 location; // 생성할 보스 위치
     public Sprite sprite;
-    public float damage;
+    public float contactDamage;
+    public float[] bulletDamage;
     public float maxHealth; // 최대 체력
     public float moveSpeed; // 이동 속도
+    public GameObject[] bullet;
 }
