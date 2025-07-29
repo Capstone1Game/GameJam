@@ -6,6 +6,7 @@ public class PlayerMov : MonoBehaviour
 {
     public float maxSpeed;
     public float jumpPower;
+    bool isJumping;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
@@ -19,8 +20,11 @@ public class PlayerMov : MonoBehaviour
     void Update()
     {
         //Jump
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && !isJumping)
+        {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            isJumping = true;
+        }
 
         //Stop Speed
         if (Input.GetButtonUp("Horizontal"))
@@ -29,7 +33,7 @@ public class PlayerMov : MonoBehaviour
         }
 
         //Direction sprite
-        if (Input.GetButtonDown("Horizontal"))
+        if (Input.GetButton("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
 
         //animation
@@ -56,5 +60,24 @@ public class PlayerMov : MonoBehaviour
         {
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
         }
+
+        if(rigid.velocity.y < 0)
+        {
+            Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
+
+            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
+
+            if (rayHit.collider != null)
+            {
+                isJumping = false;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //점프 한번만 가능하게 함
+        if((collision.gameObject.tag == "Elevator") || (collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Ladder"))
+            isJumping = false;
     }
 }
