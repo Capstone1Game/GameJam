@@ -66,25 +66,6 @@ public class Boss : MonoBehaviour
         gameObject.transform.position = data.location;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!other.CompareTag("Player") || !isLive) return;
-        // health -= other.GetComponent<GameManager>().damage;
-        health -= GameManager.instance.damage; // 임시 코드
-        StartCoroutine(KnockBack());
-        if (health > 0)
-        {
-            anim.SetTrigger("Hit");
-        }
-        else
-        {
-            isLive = false;
-            coll.enabled = false;
-            rigid.simulated = false;
-            spriter.sortingOrder = 1;
-            anim.SetBool("Dead", true);
-        }
-    }
     public void SetState(State state)
     {
         switch (state)
@@ -122,6 +103,25 @@ public class Boss : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, dirVec, speed * Time.deltaTime);
             yield return null;
         }
+    }
+
+    public void OnDamage(int damage)
+    {
+        if (!isLive) return;
+        health -= damage;
+        if (health > 0)
+        {
+            anim.SetTrigger("Hit");
+        }
+        else
+        {
+            isLive = false;
+            coll.enabled = false;
+            rigid.simulated = false;
+            spriter.sortingOrder = 1;
+            anim.SetBool("Dead", true);
+        }
+        StartCoroutine(KnockBack());
     }
 
     void Dead()
