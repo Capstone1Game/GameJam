@@ -19,9 +19,17 @@ public class DummyLogic : MonoBehaviour
     {
         if (collision.gameObject.name == "shovel")
         {
-            anim.Play("Straw Training Dummy Hit", -1, 0f);
+            anim.Play("Straw Training Dummy Hit", -1, 0f); // 더미 피격 애니메이션 재생
             Debug.Log(collision.gameObject.name);
+            //StartCoroutine(HitStop(0.2f)); // 피격 시 시간 조금 멈추기
         }
+    }
+
+    IEnumerator HitStop(float duration)
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f;
     }
 
 }
