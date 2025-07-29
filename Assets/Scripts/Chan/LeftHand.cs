@@ -33,16 +33,13 @@ public class LeftHand : MonoBehaviour
 
         bool isReverse = PlayerManager.Instance.isLeft;
         spriter.sortingOrder = isReverse ? 7 : 4;
-        spriter.flipX = isReverse;
+        spriter.flipY = isReverse;
     }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "BossBullet")
         {
-            Rigidbody2D bulletRigid = other.GetComponent<Rigidbody2D>();
-            if (bulletRigid == null) return;
-            Vector2 reverseForce = -bulletRigid.velocity;
-            bulletRigid.AddForce(reverseForce, ForceMode2D.Impulse);
+            Destroy(other.gameObject);
         }        
     }
 }
