@@ -9,14 +9,14 @@ public class PlayerManager : MonoBehaviour
     public State currentState = State.Idle;
     public bool isLeft = false;
     public bool isLive = true;
-    private bool isDamage = false;
+    public bool isDamage = false;
     public static PlayerManager Instance;
 
     private SpriteRenderer spriter;
     private Rigidbody2D rigid;
 
     public int currentHealth;
-    private int maxHealth = 20;
+    private int maxHealth = 100;
     Animator anim;
 
     void Awake()
@@ -44,33 +44,36 @@ public class PlayerManager : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        if ((other.gameObject.tag == "Boss" || other.gameObject.tag == "BossBullet") && !isDamage)
+        if ((other.gameObject.tag == "Boss") && !isDamage)
         {
-            StartCoroutine(OnDamage(other.transform.position, 10));
+            OnDamage(other.transform.position, (int) GameManager.instance.bossController.GetContactDamage());
         }
     }
-
-    IEnumerator OnDamage(Vector2 targetPos,int damage)
+    public void OnDamage(Vector2 targetPos, int damage)
     {
+        if (isDamage) return;
         isDamage = true;
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
             DoDie();
-        }
-        else
+            return;
+        } else
         {
-            spriter.color = Color.red;
-            int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
-            rigid.AddForce(new Vector2(dirc, 1), ForceMode2D.Impulse);
-            Debug.Log(dirc);
-            yield return new WaitForSeconds(0.1f);
-            spriter.color = Color.white;
-            spriter.color = new Color(1, 1, 1, 0.4f);
-            yield return new WaitForSeconds(0.5f);
-            spriter.color = new Color(1, 1, 1, 1);
-            isDamage = false;
+            StartCoroutine(KnockBack(targetPos, damage));
         }
+    }
+    public IEnumerator KnockBack(Vector2 targetPos,int damage)
+    {
+        spriter.color = Color.red;
+        int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
+        rigid.AddForce(new Vector2(dirc, 1), ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.1f);
+        spriter.color = Color.white;
+        spriter.color = new Color(1, 1, 1, 0.4f);
+        yield return new WaitForSeconds(0.5f);
+        spriter.color = new Color(1, 1, 1, 1);
+        isDamage = false;
     }
 
     void DoDie()

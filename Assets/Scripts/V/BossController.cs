@@ -36,9 +36,21 @@ public class BossController : MonoBehaviour
         float maxHealth = boss.maxHealth;
         return curHealth / maxHealth;
     }
+
+    public float GetBulletDamage(int bulletId)
+    {
+        float damage = boss.bulletDamage[bulletId];
+        return damage;
+    }
+
+    public float GetContactDamage()
+    {
+        float damage = boss.contactDamage;
+        return damage;
+    }
     IEnumerator FireBullet(GameObject bullet)
     {
-        while (boss.isLive)
+        while (boss.isLive && boss != null)
         {
             yield return new WaitForSeconds(2f);
             GameObject instantBullet = Instantiate(bullet, boss.transform.position, boss.transform.rotation);
@@ -48,7 +60,7 @@ public class BossController : MonoBehaviour
 
     IEnumerator DrawLaser(GameObject bullet)
     {
-        while (boss.isLive)
+        while (boss.isLive && boss != null)
         {
             yield return new WaitForSeconds(1f);
             GameObject instantBullet = Instantiate(bullet, boss.transform.position, boss.transform.rotation);

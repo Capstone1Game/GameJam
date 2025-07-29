@@ -32,6 +32,7 @@ public class Boss : MonoBehaviour
         anim = GetComponent<Animator>();
         spriter = GetComponent<SpriteRenderer>();
         coll = GetComponent<Collider2D>();
+        SetState(State.Idle);
         isLive = true;
     }
 
@@ -42,7 +43,6 @@ public class Boss : MonoBehaviour
         {
             return;
         }
-        rigid.velocity = Vector2.zero;
     }
 
     void LateUpdate()
@@ -82,6 +82,7 @@ public class Boss : MonoBehaviour
                 break;
             case State.Idle:
                 state = State.Idle;
+                rigid.isKinematic = true;
                 break;
             case State.Attack:
                 state = State.Attack;
@@ -91,29 +92,18 @@ public class Boss : MonoBehaviour
                 break;
         }
     }
-    IEnumerator KnockBack()
-    {
-        yield return null;
-
-        Vector3 playerPos = GameManager.instance.player.transform.position;
-        Vector3 dirVec = transform.position - playerPos;
-        dirVec.y = 0;
-        rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(1f);
-        StartCoroutine(Reposition(pos));
-    }
-
-    IEnumerator Reposition(Vector3 dirVec)
-    {
-        float speed;
-        if (moveSpeed == 0f) { speed = 1f; }
-        else { speed = moveSpeed; }
-        while (Vector3.Distance(transform.position, dirVec) > 0.01f)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, dirVec, speed * Time.deltaTime);
-            yield return null;
-        }
-    }
+    //IEnumerator Reposition(Vector3 dirVec)
+    //{
+    //    SetState(State.Idle);
+    //    float speed;
+    //    if (moveSpeed == 0f) { speed = 1f; }
+    //    else { speed = moveSpeed; }
+    //    while (Vector3.Distance(transform.position, dirVec) > 0.01f)
+    //    {
+    //        transform.position = Vector3.MoveTowards(transform.position, dirVec, speed * Time.deltaTime);
+    //        yield return null;
+    //    }
+    //}
 
     public void OnDamage(int damage)
     {
@@ -131,7 +121,6 @@ public class Boss : MonoBehaviour
             spriter.sortingOrder = 1;
             anim.SetBool("Dead", true);
         }
-        StartCoroutine(KnockBack());
     }
 
     void Dead()
