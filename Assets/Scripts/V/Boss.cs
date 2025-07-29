@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public enum State { Attack } // 보스의 행동 상태
+    public enum State { Idle, Attack, KnockBack } // 보스의 행동 상태
+    public State state;
     public RuntimeAnimatorController[] animCon;
     public Rigidbody2D target;
 
@@ -38,9 +39,6 @@ public class Boss : MonoBehaviour
         {
             return;
         }
-        Vector2 dirVec = target.position - rigid.position;
-        Vector2 nextVec = dirVec.normalized * moveSpeed * Time.fixedDeltaTime;
-        rigid.MovePosition(rigid.position + nextVec);
         rigid.velocity = Vector2.zero;
     }
 
@@ -87,13 +85,43 @@ public class Boss : MonoBehaviour
             anim.SetBool("Dead", true);
         }
     }
-
+    public void SetState(State state)
+    {
+        switch (state)
+        {
+            case State.Idle:
+                state = State.Idle;
+                break;
+            case State.Attack:
+                state = State.Attack;
+                break;
+            case State.KnockBack:
+                state = State.KnockBack;
+                break;
+        }
+    }
     IEnumerator KnockBack()
     {
         yield return null;
+
         Vector3 playerPos = GameManager.instance.player.transform.position;
         Vector3 dirVec = transform.position - playerPos;
+        dirVec.y = 0;
         rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(Reposition(location));
+    }
+
+    IEnumerator Reposition(Vector3 dirVec)
+    {
+        float speed;
+        if (moveSpeed == 0f) { speed = 1f; }
+        else { speed = moveSpeed; }
+        while (Vector3.Distance(transform.position, dirVec) > 0.01f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, dirVec, speed * Time.deltaTime);
+            yield return null;
+        }
     }
 
     void Dead()
