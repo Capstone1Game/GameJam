@@ -169,7 +169,8 @@ MonoBehaviour:
   target: {fileID: 8743349429477241689, guid: 58ff85dfe4a134d3abab020508b6bb55, type: 3}
   id: 0
   bossName: 
-  location: {x: 0, y: 0, z: 0}
+  pos: {x: 0, y: 0, z: 0}
+  rot: {x: 0, y: 0, z: 0, w: 0}
   contactDamage: 0
   bulletDamage: []
   health: 0

@@ -10,11 +10,12 @@ public class BossController : MonoBehaviour
     private Boss boss;
     public void CreateBoss(int id)
     {
-        GameObject instantBoss = Instantiate(prefab);
+        GameObject instantBoss = Instantiate(prefab, data[id].pos, data[id].rot);
         if (boss = instantBoss.GetComponent<Boss>())
         {
             instantBoss.name = $"Boss {id}";
             boss.Init(data[id]);
+            GameManager.instance.boss = instantBoss;
             StartBossRoutine(id);
         }
     }
@@ -29,25 +30,28 @@ public class BossController : MonoBehaviour
                 break;
         }
     }
-
+    public float GetHP()
+    {
+        float curHealth = boss.health;
+        float maxHealth = boss.maxHealth;
+        return curHealth / maxHealth;
+    }
     IEnumerator FireBullet(GameObject bullet)
     {
-        while (true)
+        while (boss.isLive)
         {
             yield return new WaitForSeconds(2f);
             GameObject instantBullet = Instantiate(bullet, boss.transform.position, boss.transform.rotation);
-            instantBullet.transform.SetParent(boss.transform);
             StartCoroutine(instantBullet.GetComponent<Bullet>().FireBullet(instantBullet.transform.position, boss.target.position));
         }
     }
 
     IEnumerator DrawLaser(GameObject bullet)
     {
-        while (true)
+        while (boss.isLive)
         {
             yield return new WaitForSeconds(1f);
             GameObject instantBullet = Instantiate(bullet, boss.transform.position, boss.transform.rotation);
-            instantBullet.transform.SetParent(boss.transform);
             StartCoroutine(instantBullet.GetComponent<Bullet>().DrawLaser(instantBullet.transform.position, boss.target.position));
         }
     }
