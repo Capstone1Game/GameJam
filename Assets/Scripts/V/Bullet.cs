@@ -29,8 +29,6 @@ public class Bullet : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"충돌 객체 이름: {collision.name}, 태그: {collision.tag}");
-
         if (collision.CompareTag("Player") || collision.CompareTag("Ground") || collision.CompareTag("Ladder") || collision.CompareTag("Elevator"))
         {
             Destroy(gameObject);
