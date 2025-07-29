@@ -1,0 +1,77 @@
+using System.Collections;
+using System.Collections.Generic;
+using JetBrains.Annotations;
+using UnityEngine;
+
+public class Bullet : MonoBehaviour
+{
+    public float travelTime = 1.5f;
+    public float arcHeight = 3f;
+    Rigidbody2D rigid;
+    SpriteRenderer spriter;
+    Collider2D coll;
+    void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        spriter = GetComponent<SpriteRenderer>();
+        coll = GetComponent<Collider2D>();
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        StopAllCoroutines();
+        if (collision.gameObject.tag == "Player")
+        {
+            Debug.Log("플레이어 피 닳는 로직 실행");
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Ladder" || collision.gameObject.tag == "Elevator")
+        {
+            Debug.Log("땅에 닿음 감지");
+            coll.enabled = false;
+            rigid.simulated = false;
+            spriter.sortingOrder = 1;
+            Destroy(gameObject, 2f);
+        }
+    }
+
+
+    public IEnumerator FireBullet(Vector3 pos, Vector3 dir)
+    {
+        float time = 0f;
+        Vector3 peakPos = (pos - dir) * 0.5f; // 최고점 기준 위치
+
+        while (time < travelTime && this != null)
+        {
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / travelTime);
+
+            Vector3 currentPos = Vector3.Lerp(pos, dir, t);
+
+            // 포물선 곡선 추가 (Y축 높이)
+            float height = arcHeight * 4 * t * (1 - t);  // 최대 높이: arcHeight
+            currentPos.y += height;
+            transform.position = currentPos;
+
+
+
+            Vector3 lookTarget = (t < 0.5f) ? dir : peakPos;
+
+            Vector3 toLook = transform.position - lookTarget;
+
+            if (Mathf.Abs(t - 0.5f) < 0.02f)
+            {
+                toLook.x = transform.position.x;
+            }
+            float angle = Mathf.Atan2(toLook.y, toLook.x) * Mathf.Rad2Deg;
+
+
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+            yield return null;
+        }
+
+        if (this != null)
+            transform.position = dir;
+    }
+
+}
