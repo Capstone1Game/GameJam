@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
-    public enum State { Idle, Attack, KnockBack } // 보스의 행동 상태
+    public enum State { Create, Idle, Attack, KnockBack } // 보스의 행동 상태
     public State state;
     public RuntimeAnimatorController[] animCon;
     public Rigidbody2D target;
@@ -75,6 +75,9 @@ public class Boss : MonoBehaviour
     {
         switch (state)
         {
+            case State.Create:
+                state = State.Create;
+                break;
             case State.Idle:
                 state = State.Idle;
                 break;
