@@ -31,7 +31,10 @@ public class Follow : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (target == null) return;
+        if (target == null)
+        {
+            TargetInit();
+        }
         Vector3 pos = target.transform.position;
         pos.y = pos.y + dir;
         rect.position = Camera.main.WorldToScreenPoint(pos);
