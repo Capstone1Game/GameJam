@@ -34,6 +34,7 @@ public class PlayerMouse : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         prevPos = transform.position;
     }
+
     void Start()
     {
         leftHand = transform.Find("Hand_Left").gameObject;
@@ -92,7 +93,7 @@ public class PlayerMouse : MonoBehaviour
         Vector2 vector = targetPos - prevPos;
         float delta = (vector).sqrMagnitude;
         if (delta < 0.01f) delta = 0f;
-        velocity = Mathf.Clamp(delta * 2f, 0f, 1f);
+        velocity = Mathf.Clamp(delta * 0.6f, 0f, 1f);
 
         prevPos = targetPos;
         return vector;
