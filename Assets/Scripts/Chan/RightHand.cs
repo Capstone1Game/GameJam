@@ -51,9 +51,9 @@ public class RightHand : MonoBehaviour
 
         equipPoint.transform.DetachChildren();
 
-        itemRigid.gravityScale = 0.5f;
+        itemRigid.gravityScale = 0.4f;
         Vector2 throwVector = new Vector2(parentMouse.PreVector.normalized.x, parentMouse.PreVector.normalized.y);
-        itemRigid.AddForce(throwVector * 10f, ForceMode2D.Impulse); 
+        itemRigid.AddForce(throwVector * 15f, ForceMode2D.Impulse); 
 
         transform.GetChild(1).gameObject.SetActive(true);
 

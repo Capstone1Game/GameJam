@@ -17,11 +17,11 @@ public class DummyLogic : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "shovel")
+        if (collision.gameObject.name == "shovel" || collision.gameObject.tag == "ThrowingObject")
         {
-            anim.Play("Straw Training Dummy Hit", -1, 0f); // ´õ¹Ì ÇÇ°Ý ¾Ö´Ï¸ÞÀÌ¼Ç Àç»ý
+            anim.Play("Straw Training Dummy Hit", -1, 0f); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½
             Debug.Log(collision.gameObject.name);
-            //StartCoroutine(HitStop(0.2f)); // ÇÇ°Ý ½Ã ½Ã°£ Á¶±Ý ¸ØÃß±â
+            //StartCoroutine(HitStop(0.2f)); // ï¿½Ç°ï¿½ ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½
         }
     }
 

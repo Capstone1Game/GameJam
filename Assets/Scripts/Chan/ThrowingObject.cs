@@ -18,6 +18,10 @@ public class ThrowingObject : MonoBehaviour
             other.gameObject.GetComponent<Boss>().OnDamage(damage);
             Destroy(gameObject);
         }
+        else if (other.gameObject.tag == "Dummy")
+        {
+            Destroy(gameObject);
+        }
         else
         {
             myRigid.gravityScale = 1f;
