@@ -52,7 +52,7 @@ public class BossController : MonoBehaviour
     {
         while (boss.isLive && boss != null)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             GameObject instantBullet = Instantiate(bullet, boss.transform.position, boss.transform.rotation);
             StartCoroutine(instantBullet.GetComponent<Bullet>().FireBullet(instantBullet.transform.position, boss.target.position));
         }
