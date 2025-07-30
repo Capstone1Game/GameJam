@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     public bool isLive = true;
     public bool isDamage = false;
     public static PlayerManager Instance;
+    public GameManager gameManager;
 
     private SpriteRenderer spriter;
     private Rigidbody2D rigid;
@@ -72,7 +73,9 @@ public class PlayerManager : MonoBehaviour
         if (currentHealth <= 0)
         {
             DoDie();
+            gameManager.GameOver();
             return;
+
         } else
         {
             StartCoroutine(KnockBack(targetPos));
@@ -95,5 +98,6 @@ public class PlayerManager : MonoBehaviour
     {
         isLive = false;
         anim.SetTrigger("DoDeath");
+        
     }
 }
