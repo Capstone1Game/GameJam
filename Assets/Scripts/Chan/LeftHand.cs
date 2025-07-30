@@ -9,6 +9,9 @@ public class LeftHand : MonoBehaviour
     public Sprite shieldSprite;
     private Sprite originSprite;
 
+    public AudioClip parryAudio; // parrying sound
+    CameraShake Camera;
+
     void Awake()
     {
         spriter = GetComponent<SpriteRenderer>();
@@ -17,6 +20,7 @@ public class LeftHand : MonoBehaviour
     void Start()
     {
         originSprite = spriter.sprite;
+        Camera = GameObject.FindWithTag("MainCamera").GetComponent<CameraShake>();
     }
 
     // Update is called once per frame
@@ -38,6 +42,18 @@ public class LeftHand : MonoBehaviour
         if (other.tag == "BossBullet")
         {
             Destroy(other.gameObject);
+            StartCoroutine(HitStop(0.25f));
+            GetComponent<AudioSource>().Stop();
+            GetComponent<AudioSource>().PlayOneShot(parryAudio, 0.8f);
+            Camera.VibrateForTime(0.05f);
         }        
+    }
+
+    //패링 시 정지 효과
+    IEnumerator HitStop(float duration)
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f;
     }
 }
