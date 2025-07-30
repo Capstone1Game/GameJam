@@ -7,8 +7,7 @@ public class Bullet : MonoBehaviour
 {
     public enum Type { FireBall, Laser }
     public Type type;
-    public float travelTime = 1.5f;
-    public float arcHeight = 3f;
+    public float travelTime = 4f;
     Rigidbody2D rigid;
     SpriteRenderer spriter;
     LineRenderer lineRenderer;
@@ -29,13 +28,9 @@ public class Bullet : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ground") || collision.CompareTag("Ladder") || collision.CompareTag("Elevator"))
+        if (collision.CompareTag("Player") && !PlayerManager.Instance.isDamage)
         {
-            Destroy(gameObject);
-        }
-        else if (collision.CompareTag("Player") && !PlayerManager.Instance.isDamage)
-        {
-            PlayerManager.Instance.OnDamage(collision.transform.position, (int) GameManager.instance.bossController.GetBulletDamage(0));
+            PlayerManager.Instance.OnDamage(collision.transform.position, (int)GameManager.instance.bossController.GetBulletDamage(0));
             Destroy(gameObject);
         }
     }
@@ -44,41 +39,36 @@ public class Bullet : MonoBehaviour
 
     public IEnumerator FireBullet(Vector3 pos, Vector3 dir)
     {
-        float time = 0f;
-        Vector3 peakPos = (pos - dir) * 0.5f; // 최고점 기준 위치
+        float gravity = Mathf.Abs(Physics2D.gravity.y);
 
-        while (time < travelTime && this != null)
+        float dx = dir.x - pos.x;
+        float dy = dir.y - pos.y;
+
+        float maxHeight = 7;
+
+        float timeToApex = Mathf.Sqrt(2f * maxHeight / gravity);
+        float totalTime = timeToApex + Mathf.Sqrt(2f * (maxHeight - dy) / gravity);
+
+        // 초기 속도 계산
+        float vx = dx / totalTime;
+        float vy = gravity * timeToApex;
+
+        float time = 0f;
+
+        while (time < totalTime)
         {
             time += Time.deltaTime;
-            float t = Mathf.Clamp01(time / travelTime);
+            float t = Mathf.Clamp(time, 0f, totalTime);
 
-            Vector3 currentPos = Vector3.Lerp(pos, dir, t);
-
-            // 포물선 곡선 추가 (Y축 높이)
-            float height = arcHeight * 4 * t * (1 - t);  // 최대 높이: arcHeight
-            currentPos.y += height;
-            transform.position = currentPos;
-
-
-
-            Vector3 lookTarget = (t < 0.5f) ? dir : peakPos;
-
-            Vector3 toLook = transform.position - lookTarget;
-
-            if (Mathf.Abs(t - 0.5f) < 0.02f)
-            {
-                toLook.x = transform.position.x;
-            }
-            float angle = Mathf.Atan2(toLook.y, toLook.x) * Mathf.Rad2Deg;
-
-
-            transform.rotation = Quaternion.Euler(0f, 0f, angle);
-
+            float x = vx * t;
+            float y = vy * t - 0.5f * gravity * t * t;
+            Vector3 offset = new Vector3(x, y, 0f);
+            if (this != null)
+                transform.position = pos + offset;
             yield return null;
         }
-
-        if (this != null)
-            transform.position = dir;
+        if (this != null) Destroy(gameObject);
+        yield break;
     }
 
     public IEnumerator DrawLaser(Vector3 pos, Vector3 dir)
