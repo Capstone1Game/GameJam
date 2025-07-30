@@ -8,7 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Kim/StaegProto.unity
     guid: 66d19b4f0f25ffd4f8882b4e5378bb8b
+  - enabled: 1
+    path: Assets/Scenes/V/BossStage.unity
+    guid: 6bf6899e85a48408e9b6088c1b43be72
+  - enabled: 1
+    path: Assets/Scenes/Kim/BossStage.unity
+    guid: a7cf0de45be23ac41b13f704ab36b0ce
   m_configObjects: {}
