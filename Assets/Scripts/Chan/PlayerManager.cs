@@ -53,16 +53,17 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionStay2D(Collision2D other)
     {
         if ((other.gameObject.tag == "Boss") && !isDamage)
         {
-            OnDamage(other.transform.position, (int) GameManager.instance.bossController.GetContactDamage());
+            OnDamage(other.transform.position, (int)GameManager.instance.bossController.GetContactDamage());
         }
     }
 
     public float GetHP()
-    {   float damage = (float) currentHealth / maxHealth;
+    {
+        float damage = (float)currentHealth / maxHealth;
         return damage;
     }
     public void OnDamage(Vector2 targetPos, int damage)
@@ -72,11 +73,11 @@ public class PlayerManager : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            DoDie();
-            gameManager.GameOver();
+            anim.SetBool("DoDeath", true);
             return;
 
-        } else
+        }
+        else
         {
             StartCoroutine(KnockBack(targetPos));
         }
@@ -85,11 +86,11 @@ public class PlayerManager : MonoBehaviour
     {
         spriter.color = Color.red;
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
-        rigid.AddForce(new Vector2(dirc, 1), ForceMode2D.Impulse);
+        rigid.AddForce(new Vector2(dirc, 3), ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.1f);
         spriter.color = Color.white;
         spriter.color = new Color(1, 1, 1, 0.4f);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         spriter.color = new Color(1, 1, 1, 1);
         isDamage = false;
     }
@@ -97,7 +98,6 @@ public class PlayerManager : MonoBehaviour
     void DoDie()
     {
         isLive = false;
-        anim.SetTrigger("DoDeath");
-        
+        gameManager.GameOver();
     }
 }

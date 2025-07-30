@@ -49,7 +49,7 @@ public class Weapon : MonoBehaviour
         AudioClip audioForSmallAttack = arrAudioForSmallattack[sel];
         AudioClip audioForBigAttack = arrAudioForBigattack[sel];
 
-        if (other.tag == "Boss")
+        if (other.tag == "Boss" && !PlayerManager.Instance.isDamage && PlayerManager.Instance.isLive)
         {
             damage = CalculateDamage();
             other.GetComponent<Boss>().OnDamage(damage);
@@ -67,11 +67,11 @@ public class Weapon : MonoBehaviour
                 GetComponent<AudioSource>().PlayOneShot(audioForSmallAttack, 0.8f);
             }
         }
-        else if(other.tag == "Dummy")
+        else if (other.tag == "Dummy")
         {
             damage = CalculateDamage();
             Debug.Log(damage);
-            
+
             if (damage == weaponDamage) // max공격일 때 타격감위해 0.1초 멈추기
             {
                 StartCoroutine(HitStop(0.25f));
@@ -98,6 +98,8 @@ public class Weapon : MonoBehaviour
     //타격 시 일정 데미지 이상을 줄 때 정지 효과
     IEnumerator HitStop(float duration)
     {
+        if (PlayerManager.Instance.isDamage) yield break;
+
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(duration);
         Time.timeScale = 1f;

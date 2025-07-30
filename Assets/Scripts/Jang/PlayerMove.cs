@@ -19,7 +19,7 @@ public class PlayerMov : MonoBehaviour
 
     void Update()
     {
-        if (!PlayerManager.Instance.isLive) return;
+        if (!PlayerManager.Instance.isLive || PlayerManager.Instance.isDamage) return;
         //Jump
         if (Input.GetButtonDown("Jump") && (PlayerManager.Instance.currentState != PlayerManager.State.Jump))
         {
@@ -47,7 +47,7 @@ public class PlayerMov : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!PlayerManager.Instance.isLive) return;
+        if (!PlayerManager.Instance.isLive || PlayerManager.Instance.isDamage) return;
         //Max Speed
         if (rigid.velocity.x > maxSpeed)
         {
@@ -68,7 +68,7 @@ public class PlayerMov : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //���� �ѹ��� �����ϰ� ��
-        if((collision.gameObject.tag == "Elevator") || (collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Ladder"))
+        if ((collision.gameObject.tag == "Elevator") || (collision.gameObject.tag == "Ground") || (collision.gameObject.tag == "Ladder"))
             PlayerManager.Instance.SetState(PlayerManager.State.Idle);
     }
 }
