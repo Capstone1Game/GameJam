@@ -39,6 +39,7 @@ public class LeftHand : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (!PlayerManager.Instance.isRightClick) return;
         if (other.tag == "BossBullet")
         {
             Destroy(other.gameObject);
